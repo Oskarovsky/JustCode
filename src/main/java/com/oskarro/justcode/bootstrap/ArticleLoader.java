@@ -4,7 +4,6 @@ import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
