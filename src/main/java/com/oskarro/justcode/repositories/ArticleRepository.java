@@ -1,4 +1,9 @@
 package com.oskarro.justcode.repositories;
 
-public class ArticleRepository {
+import com.oskarro.justcode.domains.Article;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ArticleRepository extends CrudRepository<Article, Integer> {
+
+
 }

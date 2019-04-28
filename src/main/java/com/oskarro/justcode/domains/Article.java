@@ -17,7 +17,5 @@ public class Article {
 
     private String title;
     private String content;
-    private Date date;
-    private String[] tag;
 
 }
