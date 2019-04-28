@@ -1,35 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>JustCode</title>
+<html>
+<head lang="en">
 
-    <link href="../static/css/style.css"
-          th:href="@{css/guru.css}" rel="stylesheet" media="screen"/>
+    <title>JustCode blog</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen" />
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
-
 <body>
+
 <div class="container">
-    <div class="jumbotron">
-        <img src="../static/images/baner.jpg" width="1000" th:src="@{images/baner.jpg}"/>
-
-        <h1>JustCode!</h1>
-
-        <h2>Official blog website.</h2>
-
-    </div>
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 </div>
-
 </body>
 </html>
