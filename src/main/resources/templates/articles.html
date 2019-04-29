@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>JustCode</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(articles)}">
+        <h2>All articles</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Number</th>
+                <th>Title</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+
+            <tr th:each="article : ${articles}">
+                <td th:text="${article.id}">Id</td>
+                <td th:text="${article.title}">Article title</td>
+                <td><a th:href="${ '/article/' + article.id}">View</a></td>
+                <td><a th:href="${'/article/edit/' + article.id}">Edit</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>
