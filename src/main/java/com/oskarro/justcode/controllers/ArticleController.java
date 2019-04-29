@@ -8,20 +8,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ArticleController {
 
     private ArticleService articleService;
 
-    @Autowired
     public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    @Autowired
+    public void setArticleService(ArticleService articleService) {
         this.articleService = articleService;
     }
 
     @GetMapping("article/new")
     public String newArticle(Model model) {
-        model.addAttribute("product", new Article());
+        model.addAttribute("article", new Article());
         return "articleform";
     }
 
@@ -31,7 +36,7 @@ public class ArticleController {
         return "redirect:/article/" + article.getId();
     }
 
-    @GetMapping("article/{id}")
+    @RequestMapping("article/show/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
         model.addAttribute("article", articleService.getArticleById(id));
         return "articleshow";

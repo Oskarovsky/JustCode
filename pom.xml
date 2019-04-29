@@ -64,6 +64,7 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+
         <!-- DATABASE -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

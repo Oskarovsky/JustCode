@@ -3,11 +3,9 @@ package com.oskarro.justcode.services;
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-@Component
+@Service
 public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
@@ -23,8 +21,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Optional<Article> getArticleById(Long id) {
-        return articleRepository.findById(id);
+    public Article getArticleById(Long id) {
+        return articleRepository.findById(id).orElse(null);
     }
 
     @Override

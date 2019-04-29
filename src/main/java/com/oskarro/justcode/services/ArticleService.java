@@ -8,7 +8,7 @@ public interface ArticleService {
 
     Iterable<Article> listAllArticles();
 
-    Optional<Article> getArticleById(Long id);
+    Article getArticleById(Long id);
 
     Article saveArticle(Article article);
 
