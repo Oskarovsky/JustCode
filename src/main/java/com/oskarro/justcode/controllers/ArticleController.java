@@ -2,13 +2,11 @@ package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.services.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ArticleController {
@@ -16,11 +14,6 @@ public class ArticleController {
     private ArticleService articleService;
 
     public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
-    }
-
-    @Autowired
-    public void setArticleService(ArticleService articleService) {
         this.articleService = articleService;
     }
 
@@ -36,7 +29,7 @@ public class ArticleController {
         return "redirect:/article/" + article.getId();
     }
 
-    @RequestMapping("article/show/{id}")
+    @GetMapping("article/show/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
         model.addAttribute("article", articleService.getArticleById(id));
         return "articleshow";

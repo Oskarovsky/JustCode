@@ -2,7 +2,6 @@ package com.oskarro.justcode.services;
 
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.repositories.ArticleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,8 +9,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
 
-    @Autowired
-    public void setArticleRepository(ArticleRepository articleRepository) {
+    public ArticleServiceImpl(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 

@@ -2,8 +2,6 @@ package com.oskarro.justcode.services;
 
 import com.oskarro.justcode.domains.Article;
 
-import java.util.Optional;
-
 public interface ArticleService {
 
     Iterable<Article> listAllArticles();
