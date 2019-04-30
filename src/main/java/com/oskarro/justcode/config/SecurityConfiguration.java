@@ -1,7 +1,6 @@
 package com.oskarro.justcode.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +17,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/", "/articles", "/article/show", "/console/**", "/h2/**").permitAll()
+                .antMatchers("/", "/articles", "/article/show", "/console/**", "/h2/**",
+                        "/article/show/**", "/resources/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
@@ -33,8 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin").password("admin").roles("ADMIN")
+                .withUser("admin").password("{noop}admin").roles("ADMIN")
                 .and()
-                .withUser("user").password("user").roles("USER");
+                .withUser("user").password("{noop}user").roles("USER");
     }
+
+
 }

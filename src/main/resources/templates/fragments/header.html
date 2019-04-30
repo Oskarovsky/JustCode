@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
 </head>
+
 <body>
 
 <div class="container">
     <div th:fragment="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#" th:href="@{/}">JustCode</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
 
             <div class="collapse navbar-collapse">
+
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="navbar-link" href="#" th:href="@{/articles}">All articles <span class="sr-only">(current)</span></a>
+                        <a class="navbar-link" href="#" th:href="@{/articles}">All articles</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="navbar-link" href="#" th:href="@{/article/new}">Add article</a>
+                        <a class="navbar-link" sec:authorize="hasRole('ROLE_ADMIN')"
+                           href="#" th:href="@{/article/new}">Add article</a>
+                    </li>
+
+                    <li>
+                        <a class="navbar-link" href="#" th:href="@{/login}">Sign In</a>
                     </li>
                 </ul>
+
                 <form class="form-inline my-2 my-md-0">
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                 </form>
@@ -31,6 +39,15 @@
         <div class="jumbotron">
             <h3 align="center">JustCode with Oskar Slyk</h3>
         </div>
+
+        <div th:if="${#httpServletRequest.remoteUser != null}">
+            <p th:text="'Welcome ' + ${#httpServletRequest.remoteUser}">
+                sample_user
+            </p>
+        </div>
+
+
+
     </div>
 </div>
 
