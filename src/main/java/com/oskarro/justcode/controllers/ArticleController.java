@@ -26,7 +26,7 @@ public class ArticleController {
     @PostMapping("article")
     public String saveArticle(Article article) {
         articleService.saveArticle(article);
-        return "redirect:/article/" + article.getId();
+        return "redirect:/article/show/" + article.getId();
     }
 
     @GetMapping("article/show/{id}")
