@@ -1,13 +1,13 @@
 package com.oskarro.justcode.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
 
-    @RequestMapping("/login")
-    private String login() {
+    @GetMapping("/login")
+    public String login() {
         return "login";
     }
 

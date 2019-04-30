@@ -54,7 +54,6 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         secondPost.setContent("No, not really. It has us writing SQL statements. What if you’re just doing a " +
                 "prototype? If you");
         secondPost.getCategories().add(springCategory);
-        //secondPost.getCategories().add(javaCategory);
         articleRepository.save(secondPost);
         articles.add(secondPost);
 
