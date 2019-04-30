@@ -4,9 +4,11 @@
     <title>JustCode</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
+
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
     <div th:if="${param.error}">
         <label style="color:red">Invalid username and password.</label>
     </div>
@@ -32,7 +34,7 @@
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
                         <input type="text" name="username" class="form-control"
-                               placeholder="yourLogin" required autofocus>
+                               placeholder="Username" required autofocus>
                     </div>
                 </div>
             </div>
@@ -48,13 +50,6 @@
                         <input type="password" name="password" class="form-control"
                                placeholder="Password" required>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-control-feedback">
-                        <span class="text-danger align-middle">
-                        <!-- Put password error message here -->
-                        </span>
                 </div>
             </div>
         </div>
@@ -73,7 +68,7 @@
         <div class="row" style="padding-top: 1rem">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button>
+                <button type="submit" class="btn btn-success">Login</button>
                 <a class="btn btn-link" href="/password/reset">Forgot Your Password?</a>
             </div>
         </div>
