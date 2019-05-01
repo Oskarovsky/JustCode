@@ -32,7 +32,7 @@
                 </ul>
 
                 <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Log out" />
+                    <input sec:authorize="isAuthenticated()" type="submit" value="Log out" />
                 </form>
                 <!--
                 <form class="form-inline my-2 my-md-0">
