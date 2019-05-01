@@ -1,20 +1,21 @@
 package com.oskarro.justcode.domains;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
-public class Article {
+@NoArgsConstructor
+public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,12 +49,21 @@ public class Article {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     Set<Category> categories = new HashSet<>();
 
-    public Article() {
-    }
-
     public Article(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 500) String description, @NotNull String content) {
         this.title = title;
         this.description = description;
         this.content = content;
     }
+
+    public void addCategory(Category category) {
+        categories.add(category);
+        category.getArticles().add(this);
+    }
+
+    public void removeCategory(Category category) {
+        categories.remove(category);
+        category.getArticles().remove(this);
+    }
+
+
 }

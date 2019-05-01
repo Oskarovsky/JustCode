@@ -1,12 +1,16 @@
 package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
+import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.services.ArticleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class ArticleController {
@@ -20,6 +24,8 @@ public class ArticleController {
     @GetMapping("article/new")
     public String newArticle(Model model) {
         model.addAttribute("article", new Article());
+        Set<Category> list = new HashSet<Category>();
+        model.addAttribute("categories", list);
         return "articleform";
     }
 
@@ -52,5 +58,6 @@ public class ArticleController {
         articleService.deleteArticle(id);
         return "redirect:/articles";
     }
+
 
 }

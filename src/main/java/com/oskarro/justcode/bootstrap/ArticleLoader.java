@@ -4,16 +4,17 @@ import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import com.oskarro.justcode.repositories.CategoryRepository;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Data
+@Getter
+@Setter
 @Component
 public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -44,7 +45,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         firstPost.setDescription("This is my first post on this web.");
         firstPost.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
                 "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
-        firstPost.getCategories().add(javaCategory);
+        firstPost.addCategory(javaCategory);
         articleRepository.save(firstPost);
         articles.add(firstPost);
 
@@ -53,7 +54,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         secondPost.setDescription("We want to create new blog website for java fanatics");
         secondPost.setContent("No, not really. It has us writing SQL statements. What if you’re just doing a " +
                 "prototype? If you");
-        secondPost.getCategories().add(springCategory);
+        secondPost.addCategory(springCategory);
         articleRepository.save(secondPost);
         articles.add(secondPost);
 

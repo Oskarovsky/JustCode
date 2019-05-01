@@ -1,6 +1,9 @@
 package com.oskarro.justcode.services;
 
 import com.oskarro.justcode.domains.Article;
+import com.oskarro.justcode.domains.Category;
+
+import java.util.List;
 
 public interface ArticleService {
 
@@ -11,4 +14,8 @@ public interface ArticleService {
     Article saveArticle(Article article);
 
     void deleteArticle(Long id);
+
+    List<Category> getAllCategories(int id);
+
+
 }

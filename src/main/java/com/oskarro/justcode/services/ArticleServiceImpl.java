@@ -1,8 +1,11 @@
 package com.oskarro.justcode.services;
 
 import com.oskarro.justcode.domains.Article;
+import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -32,6 +35,14 @@ public class ArticleServiceImpl implements ArticleService {
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
+
+    @Override
+    public List<Category> getAllCategories(int id) {
+        return articleRepository.getAllCategories(id);
+    }
+
+
+
 
 
 }
