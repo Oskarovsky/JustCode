@@ -1,3 +1,7 @@
 .navbar-nav > li{
     padding-left:15px;
 }
+
+.loginPanel {
+    padding-left: 10px;
+}

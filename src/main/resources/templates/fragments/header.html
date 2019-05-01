@@ -25,11 +25,15 @@
                         <a class="navbar-link" sec:authorize="hasRole('ROLE_ADMIN')"
                            href="#" th:href="@{/article/new}">Add article</a>
                     </li>
-
-                    <li>
-                        <a class="navbar-link" href="#" th:href="@{/login}">Sign In</a>
-                    </li>
                 </ul>
+
+                <form th:action="@{/login}">
+                    <a sec:authorize="isAnonymous()" class="loginPanel" href="#" th:href="@{/login}">Sign In</a>
+                </form>
+                <form th:action="@{/register}">
+                    <a sec:authorize="isAnonymous()" class="loginPanel" href="#" th:href="@{/register}">Register</a>
+                </form>
+
 
                 <form th:action="@{/logout}" method="post">
                     <input sec:authorize="isAuthenticated()" type="submit" value="Log out" />
