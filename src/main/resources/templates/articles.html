@@ -29,6 +29,9 @@
                 <td th:each="categories : ${article.categories}">
                     <p th:text="${categories.name}">Category</p><a th:href="@{/category/adds(id=${article.id})}">Add category</a>
                 </td>
+                <td th:if="${#lists.isEmpty(article.categories)}">
+                    <a th:href="@{/category/adds(id=${article.id})}">Add category</a>
+                </td>
                 <td>
                     <a th:href="@{/category/getArticleCategory(id=${article.id})}">Show categories</a>
                 </td>
