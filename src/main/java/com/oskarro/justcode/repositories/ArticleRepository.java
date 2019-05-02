@@ -12,6 +12,6 @@ import java.util.List;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("select art.categories from Article art where art.id=?1")
-    List<Category> getAllCategories(int idArticle);
+    List<Category> getAllCategories(Long idArticle);
 
 }

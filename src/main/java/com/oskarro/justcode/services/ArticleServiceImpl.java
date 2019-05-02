@@ -37,8 +37,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Category> getAllCategories(int id) {
+    public List<Category> getAllCategories(Long id) {
         return articleRepository.getAllCategories(id);
+    }
+
+    @Override
+    public void add(Article article) {
+        articleRepository.save(article);
     }
 
 

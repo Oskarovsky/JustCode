@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/resources/css/**").permitAll()
                     .antMatchers("/", "/articles", "/article/show/**", "/console/**", "/h2/**",
                         "/article/show/**").permitAll()
-                    .antMatchers("/article/edit/**", "/article/delete/**", "/article/new").authenticated()
+                    .antMatchers("/admin", "/article/edit/**", "/article/delete/**", "/article/new").authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")

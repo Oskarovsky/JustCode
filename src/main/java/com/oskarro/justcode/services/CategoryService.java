@@ -10,7 +10,7 @@ public interface CategoryService {
 
     public void add(Category category);
 
-    public Category findById(long id);
+    public Category findById(Long id);
 
     public void save(Category category);
 }

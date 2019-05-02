@@ -1,31 +1,35 @@
 package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
-import com.oskarro.justcode.domains.Category;
-import com.oskarro.justcode.services.ArticleService;
+import com.oskarro.justcode.services.ArticleServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.Valid;
 
 @Controller
 public class ArticleController {
 
-    private ArticleService articleService;
+    private ArticleServiceImpl articleService;
 
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleServiceImpl articleService) {
         this.articleService = articleService;
     }
 
     @GetMapping("article/new")
     public String newArticle(Model model) {
         model.addAttribute("article", new Article());
-        Set<Category> list = new HashSet<Category>();
-        model.addAttribute("categories", list);
+        return "articleform";
+    }
+
+    @PostMapping("article/new")
+    public String addArticle(Model model, @Valid Article article, BindingResult br) {
+        articleService.add(article);
+        model.addAttribute("article", new Article());
         return "articleform";
     }
 

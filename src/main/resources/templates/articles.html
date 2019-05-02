@@ -17,6 +17,7 @@
                 <th>Number</th>
                 <th>Title</th>
                 <th>Categories</th>
+                <th>Show categories</th>
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -26,7 +27,10 @@
                 <td th:text="${article.id}">Id</td>
                 <td th:text="${article.title}">Article title</td>
                 <td th:each="categories : ${article.categories}">
-                    <p th:text="${categories.name}">Category</p>
+                    <p th:text="${categories.name}">Category</p><a th:href="@{/category/adds(id=${article.id})}">Add category</a>
+                </td>
+                <td>
+                    <a th:href="@{/category/getArticleCategory(id=${article.id})}">Show categories</a>
                 </td>
                 <td><a th:href="${ '/article/show/' + article.id}">View</a></td>
                 <td><a th:href="${'/article/edit/' + article.id}">Edit</a></td>

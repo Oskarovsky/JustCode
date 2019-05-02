@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head lang="en">
+
+    <title>JustCode</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
+<!--/*@thymesVar id="category" type="com.oskarro.justcode.domains.Category"*/-->
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+    <h2>Category form</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form role="form" th:action="@{/category/add}" th:object="${category}" th:method="post">
+                <div class="form-group">
+                    <label for="name">
+                        Enter name
+                    </label>
+                    <input class="form-control" th:field="*{name}" id="name" type="text">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Add
+                </button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <a href="/">Back</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+

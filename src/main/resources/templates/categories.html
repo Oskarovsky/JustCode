@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>JustCode</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-warning text-center">
+                Categories of this article
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <table>
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category,iterationStatus  : ${categories}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${category.name}">001</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <a href="/">Powrót</a>
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

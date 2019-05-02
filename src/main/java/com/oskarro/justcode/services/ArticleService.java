@@ -15,7 +15,9 @@ public interface ArticleService {
 
     void deleteArticle(Long id);
 
-    List<Category> getAllCategories(int id);
+    List<Category> getAllCategories(Long id);
+
+    void add(Article article);
 
 
 }
