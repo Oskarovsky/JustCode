@@ -8,9 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -19,18 +17,22 @@ public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_article")
     private Long id;
 
     @NotNull
     @Size(max = 100)
+    @Column(name = "title_article")
     private String title;
 
     @NotNull
     @Size(max = 500)
+    @Column(name = "description_article")
     private String description;
 
     @NotNull
     @Lob
+    @Column(name = "content_article")
     private String content;
 
     @NotNull
@@ -43,11 +45,8 @@ public class Article implements Serializable {
     @Column(name = "last_updated_at")
     private Date lastUpdatedAt = new Date();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "article_categories",
-            joinColumns = @JoinColumn(name = "article_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    Set<Category> categories = new HashSet<>();
+    @ManyToMany(mappedBy = "articles", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    List<Category> categories = new ArrayList<>();
 
     public Article(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 500) String description, @NotNull String content) {
         this.title = title;
@@ -57,7 +56,7 @@ public class Article implements Serializable {
 
     public void addCategory(Category category) {
         categories.add(category);
-        category.getArticles().add(this);
+        category.articles.add(this);
     }
 
     public void removeCategory(Category category) {

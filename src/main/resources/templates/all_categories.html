@@ -7,6 +7,7 @@
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
+<!--/*@thymesVar id="category" type="com.oskarro.justcode.domains.Category"*/-->
 <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
@@ -19,17 +20,28 @@
     </div>
     <div class="row">
         <div class="col-md-8">
+            <label>All categories</label>
             <table>
                 <thead>
                 <tr>
                     <th>LP</th>
                     <th>Name</th>
+                    <th>Remove</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="category,iterationStatus  : ${categories}">
+                <tr th:each="category, iterationStatus  : ${categories}">
                     <td th:text="${iterationStatus.count}">1</td>
                     <td th:text="${category.name}">001</td>
+                    <td>
+                        <form role="form" th:action="@{/category/delete}" method="post">
+                            <input type="hidden" id="nameCat" th:value="${category.id}" name="idCategory">
+                            <input type="hidden" id="name" th:value="${articleId}" name="idArticle">
+                            <button type="submit" class="btn btn-primary">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>

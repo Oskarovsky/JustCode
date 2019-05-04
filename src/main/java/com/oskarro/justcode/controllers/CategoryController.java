@@ -7,10 +7,7 @@ import com.oskarro.justcode.services.CategoryServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,46 +26,67 @@ public class CategoryController {
     @GetMapping("/all")
     public String getAllIndex(Model model) {
         model.addAttribute("categories", categoryService.getAll());
-        return "categories";
+        return "all_categories";
     }
 
     @GetMapping("/add")
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
-        return "categoriesform";
+        return "add_category";
     }
 
     @PostMapping("/add")
-    public String addCategory(Model model, @Valid Category category, BindingResult br) {
+    public String addCategory(Model model,
+                              @Valid Category category, BindingResult br) {
         categoryService.add(category);
         model.addAttribute("category", new Category());
-        return "categoriesform";
+        return "add_category";
     }
 
-    @GetMapping("/adds")
-    public String addCategoryToArticle(Model model, @RequestParam(value = "id", required = true) Long id) {
+    @GetMapping(value = "/adds")
+    public String addCategoryToArticle(Model model,
+                                       @RequestParam(value = "id", required = true) Long id) {
         model.addAttribute("id", id);
         model.addAttribute("categories", categoryService.getAll());
-        return "articlesform";
+        return "add_categories";
     }
 
     @GetMapping("/relationAdd")
-    public String addParameter(Model model, @RequestParam(value = "idArticle", required = true) Long idArticle,
-                              @RequestParam(value = "idCategory", required = true) Long idCategory) {
+    public String addParameter(Model model,
+                               @RequestParam(value = "idArticle", required = true) Long idArticle,
+                               @RequestParam(value = "idCategory", required = true) Long idCategory) {
         Category cat = categoryService.findById(idCategory);
-        Article art = articleService.getArticleById(idArticle);
+        Article art = articleService.findById(idArticle);
         cat.getArticles().add(art);
         categoryService.save(cat);
         model.addAttribute("id", idArticle);
         model.addAttribute("categories", categoryService.getAll());
-        return "articlesform";
+        return "add_categories";
     }
 
     @GetMapping("/getArticleCategory")
-    public String getAllCategoriesArticle(Model model, @RequestParam(value = "id", required = false) Long id) {
+    public String getAllCategoriesArticle(Model model,
+                                          @RequestParam(value = "id", required = false) Long id) {
         model.addAttribute("categories", articleService.getAllCategories(id));
-        return "categories";
+        Article article = articleService.findById(id);
+        model.addAttribute("articleId", article.getId());
+        return "all_categories";
     }
+
+    @PostMapping("/delete")
+    public String deleteParameter(Model model,
+                               @RequestParam(value = "idArticle", required = false) Long idArticle,
+                               @RequestParam(value = "idCategory", required = true) Long idCategory) {
+        Category cat = categoryService.findById(idCategory);
+        Article art = articleService.findById(idArticle);
+        cat.getArticles().remove(art);
+        categoryService.save(cat);
+        model.addAttribute("id", idArticle);
+        model.addAttribute("categories", articleService.getAllCategories(idArticle));
+        return "all_categories";
+    }
+
+
 
 }
 

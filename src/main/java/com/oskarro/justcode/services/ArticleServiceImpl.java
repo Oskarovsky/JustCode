@@ -17,28 +17,28 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Iterable <Article> listAllArticles() {
+    public List<Article> getAll() {
         return articleRepository.findAll();
     }
 
     @Override
-    public Article getArticleById(Long id) {
+    public List<Category> getAllCategories(Long id) {
+        return articleRepository.getAllCategories(id);
+    }
+
+    @Override
+    public Article findById(Long id) {
         return articleRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Article saveArticle(Article article) {
+    public Article save(Article article) {
         return articleRepository.save(article);
     }
 
     @Override
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Category> getAllCategories(Long id) {
-        return articleRepository.getAllCategories(id);
     }
 
     @Override
