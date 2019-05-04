@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -74,16 +75,17 @@ public class CategoryController {
     }
 
     @PostMapping("/delete")
-    public String deleteParameter(Model model,
+    public String deleteParameter(Model model, RedirectAttributes redirectAttributes,
                                @RequestParam(value = "idArticle", required = false) Long idArticle,
                                @RequestParam(value = "idCategory", required = true) Long idCategory) {
         Category cat = categoryService.findById(idCategory);
         Article art = articleService.findById(idArticle);
         cat.getArticles().remove(art);
         categoryService.save(cat);
+        redirectAttributes.addAttribute("idArt", idArticle);
         model.addAttribute("id", idArticle);
         model.addAttribute("categories", articleService.getAllCategories(idArticle));
-        return "all_categories";
+        return "redirect:/category/getArticleCategory?id={idArt}";
     }
 
 
