@@ -8,11 +8,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
 @Controller
-public class ArticleController {
+@RequestMapping(("/article"))
+public class ArticleController{
 
     private ArticleServiceImpl articleService;
 
@@ -20,47 +22,48 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping("article/new")
-    public String newArticle(Model model) {
-        model.addAttribute("article", new Article());
-        return "articleform";
+    @GetMapping("/all")
+    public String listArticle(Model model) {
+        model.addAttribute("articles", articleService.getAll());
+        return "all_articles";
     }
 
-    @PostMapping("article/new")
-    public String addArticle(Model model, @Valid Article article, BindingResult br) {
+    @GetMapping("/new")
+    public String newArticle(Model model) {
+        model.addAttribute("article", new Article());
+        return "add_article";
+    }
+
+    @PostMapping("/new")
+    public String addArticle(Model model,
+                             @Valid Article article, BindingResult br) {
         articleService.add(article);
         model.addAttribute("article", new Article());
-        return "articleform";
+        return "add_article";
     }
 
     @PostMapping("article")
     public String saveArticle(Article article) {
-        articleService.saveArticle(article);
+        articleService.save(article);
         return "redirect:/article/show/" + article.getId();
     }
 
-    @GetMapping("article/show/{id}")
+    @GetMapping("/show/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
-        model.addAttribute("article", articleService.getArticleById(id));
-        return "articleshow";
+        model.addAttribute("article", articleService.findById(id));
+        return "add_article";
     }
 
-    @GetMapping("articles")
-    public String listArticle(Model model) {
-        model.addAttribute("articles", articleService.listAllArticles());
-        return "articles";
-    }
-
-    @GetMapping("article/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, Model model) {
-        model.addAttribute("article", articleService.getArticleById(id));
-        return "articleform";
+        model.addAttribute("article", articleService.findById(id));
+        return "add_article";
     }
 
-    @GetMapping("article/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
-        return "redirect:/articles";
+        return "redirect:/all_articles";
     }
 
 

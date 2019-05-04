@@ -7,17 +7,18 @@ import java.util.List;
 
 public interface ArticleService {
 
-    Iterable<Article> listAllArticles();
+    List<Article> getAll();
 
-    Article getArticleById(Long id);
-
-    Article saveArticle(Article article);
-
-    void deleteArticle(Long id);
+    Article findById(Long id);
 
     List<Category> getAllCategories(Long id);
 
+    Article save(Article article);
+
+    void deleteArticle(Long id);
+
     void add(Article article);
+
 
 
 }

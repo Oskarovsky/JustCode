@@ -26,16 +26,16 @@
             <tr th:each="article : ${articles}">
                 <td th:text="${article.id}">Id</td>
                 <td th:text="${article.title}">Article title</td>
-                <td th:each="categories : ${article.categories}">
-                    <p th:text="${categories.name}">Category</p><a th:href="@{/category/adds(id=${article.id})}">Add category</a>
+                <td th:if="${not #lists.isEmpty(article.categories)}">
+                    <p th:each="category : ${article.categories}" th:text="${category.name}">Category</p><a th:href="@{/category/adds(id=${article.id})}">Add category</a>
                 </td>
                 <td th:if="${#lists.isEmpty(article.categories)}">
-                    <a th:href="@{/category/adds(id=${article.id})}">Add category</a>
+                    <a th:if="${#lists.isEmpty(article.categories)}" th:href="@{/category/adds(id=${article.id})}">Add category</a>
                 </td>
                 <td>
                     <a th:href="@{/category/getArticleCategory(id=${article.id})}">Show categories</a>
                 </td>
-                <td><a th:href="${ '/article/show/' + article.id}">View</a></td>
+                <td><a th:href="${'/article/show/' + article.id}">View</a></td>
                 <td><a th:href="${'/article/edit/' + article.id}">Edit</a></td>
                 <td><a th:href="${'/article/delete/' + article.id}">Delete</a></td>
             </tr>
