@@ -1,7 +1,9 @@
 package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
+import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.services.ArticleServiceImpl;
+import com.oskarro.justcode.services.CategoryServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,9 +19,11 @@ import javax.validation.Valid;
 public class ArticleController{
 
     private ArticleServiceImpl articleService;
+    private CategoryServiceImpl categoryService;
 
-    public ArticleController(ArticleServiceImpl articleService) {
+    public ArticleController(ArticleServiceImpl articleService, CategoryServiceImpl categoryService) {
         this.articleService = articleService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/all")

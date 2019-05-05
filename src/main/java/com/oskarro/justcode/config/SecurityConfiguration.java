@@ -31,9 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                     .antMatchers("/resources/css/**").permitAll()
-                    .antMatchers("/", "/articles", "/article/show/**", "/console/**", "/h2/**", "/category/**",
+                    .antMatchers("/", "/articles", "/article/show/**", "/console/**", "/h2/**", "/category/",
                         "/article/show/**").permitAll()
-                    .antMatchers("/admin/**", "/article/edit/**", "/article/delete/**", "/article/new").hasRole("ADMIN")
+                    .antMatchers("/admin/**", "/article/edit/**", "/article/delete/**", "/article/new",
+                            "/category/adds/**").hasRole("ADMIN")
                     .and()
                 .formLogin()
                     .loginPage("/login")

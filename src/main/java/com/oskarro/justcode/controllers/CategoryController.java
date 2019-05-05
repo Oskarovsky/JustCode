@@ -27,7 +27,7 @@ public class CategoryController {
     @GetMapping("/all")
     public String getAllIndex(Model model) {
         model.addAttribute("categories", categoryService.getAll());
-        return "all_categories";
+        return "all_categories_of_article";
     }
 
     @GetMapping("/add")
@@ -71,7 +71,7 @@ public class CategoryController {
         model.addAttribute("categories", articleService.getAllCategories(id));
         Article article = articleService.findById(id);
         model.addAttribute("articleId", article.getId());
-        return "all_categories";
+        return "all_categories_of_article";
     }
 
     @PostMapping("/delete")
