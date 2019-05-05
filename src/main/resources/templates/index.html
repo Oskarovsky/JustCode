@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="en">
 
     <title>JustCode blog</title>
@@ -10,6 +10,11 @@
 
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-
+    <div th:if="${#httpServletRequest.remoteUser != null}">
+        <p th:text="'Welcome ' + ${#httpServletRequest.remoteUser}">
+            sample_user
+        </p>
+    </div>
+</div>
 </body>
 </html>

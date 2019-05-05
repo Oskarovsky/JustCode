@@ -27,7 +27,7 @@ public class CategoryController {
     @GetMapping("/all")
     public String getAllIndex(Model model) {
         model.addAttribute("categories", categoryService.getAll());
-        return "all_categories_of_article";
+        return "all_categories";
     }
 
     @GetMapping("/add")
@@ -44,7 +44,7 @@ public class CategoryController {
         return "add_category";
     }
 
-    @GetMapping(value = "/adds")
+    @GetMapping("/adds")
     public String addCategoryToArticle(Model model,
                                        @RequestParam(value = "id", required = true) Long id) {
         model.addAttribute("id", id);
@@ -86,6 +86,14 @@ public class CategoryController {
         model.addAttribute("id", idArticle);
         model.addAttribute("categories", articleService.getAllCategories(idArticle));
         return "redirect:/category/getArticleCategory?id={idArt}";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCategory(Model model,
+                                 @PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        model.addAttribute("categories", categoryService.getAll());
+        return "redirect:/category/all";
     }
 
 

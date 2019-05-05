@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>JustCode</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*@thymesVar id="category" type="com.oskarro.justcode.domains.Category"*/-->
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-warning text-center">
+                Categories of this article
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <label>All categories</label>
+            <table>
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Name</th>
+                    <th>Remove</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category, iterationStatus  : ${categories}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${category.name}">001</td>
+                    <td>
+                        <a th:href="${'/category/delete/' + category.id}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <a href="/">Powrót</a>
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -55,7 +55,7 @@ public class ArticleController{
     @GetMapping("/show/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
         model.addAttribute("article", articleService.findById(id));
-        return "add_article";
+        return "article_show";
     }
 
     @GetMapping("/edit/{id}")

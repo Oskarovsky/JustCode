@@ -35,4 +35,8 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.getOne(id);
     }
 
+    @Override
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }

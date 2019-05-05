@@ -19,8 +19,8 @@
                 <th>Categories</th>
                 <th sec:authorize="hasRole('ROLE_ADMIN')">Show categories</th>
                 <th>View</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
             </tr>
 
             <tr th:each="article : ${articles}">
@@ -38,8 +38,8 @@
                     <a th:href="@{/category/getArticleCategory(id=${article.id})}">Show categories</a>
                 </td>
                 <td><a th:href="${'/article/show/' + article.id}">View</a></td>
-                <td><a th:href="${'/article/edit/' + article.id}">Edit</a></td>
-                <td><a th:href="${'/article/delete/' + article.id}">Delete</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/article/edit/' + article.id}">Edit</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/article/delete/' + article.id}">Delete</a></td>
             </tr>
         </table>
 

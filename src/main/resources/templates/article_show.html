@@ -14,6 +14,9 @@
     <div class="page-header">
         <h2 th:text="${article.title}">Your article</h2>
     </div>
+    <div class="caret">
+        <p th:each="category : ${article.categories}" th:text="${category.name}">Category</p>
+    </div>
     <div>
         <form class="form-horizontal">
             <div class="form-group">
