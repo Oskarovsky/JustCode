@@ -34,7 +34,8 @@ public class UserRegistrationDto {
     private String email;
 
     @Email
-    @NotEmpty String confirmEmail;
+    @NotEmpty
+    String confirmEmail;
 
     @AssertTrue
     private Boolean terms;
