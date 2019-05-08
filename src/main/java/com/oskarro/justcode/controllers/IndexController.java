@@ -14,11 +14,16 @@ public class IndexController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        return "login";
+        return "general/login";
     }
 
     @GetMapping("/user")
     public String userIndex() {
         return "user/index";
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "/error/access-denied";
     }
 }

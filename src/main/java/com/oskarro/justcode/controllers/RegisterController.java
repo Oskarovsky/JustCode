@@ -31,7 +31,7 @@ public class RegisterController {
 
     @GetMapping
     public String showRegistrationForm(Model model) {
-        return "register";
+        return "general/register";
     }
 
     @PostMapping
@@ -43,10 +43,10 @@ public class RegisterController {
         }
 
         if (result.hasErrors()) {
-            return "register";
+            return "general/register";
         }
 
         userService.save(userDto);
-        return "redirect:/register?success";
+        return "redirect:/general/register?success";
     }
 }

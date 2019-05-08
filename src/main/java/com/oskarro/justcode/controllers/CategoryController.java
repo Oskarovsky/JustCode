@@ -27,13 +27,13 @@ public class CategoryController {
     @GetMapping("/all")
     public String getAllIndex(Model model) {
         model.addAttribute("categories", categoryService.getAll());
-        return "all_categories";
+        return "general/all_categories";
     }
 
     @GetMapping("/add")
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
-        return "add_category";
+        return "admin/add_category";
     }
 
     @PostMapping("/add")
@@ -41,7 +41,7 @@ public class CategoryController {
                               @Valid Category category, BindingResult br) {
         categoryService.add(category);
         model.addAttribute("category", new Category());
-        return "add_category";
+        return "admin/add_category";
     }
 
     @GetMapping("/adds")
@@ -49,7 +49,7 @@ public class CategoryController {
                                        @RequestParam(value = "id", required = true) Long id) {
         model.addAttribute("id", id);
         model.addAttribute("categories", categoryService.getAll());
-        return "add_categories";
+        return "admin/add_categories";
     }
 
     @GetMapping("/relationAdd")
@@ -62,7 +62,7 @@ public class CategoryController {
         categoryService.save(cat);
         model.addAttribute("id", idArticle);
         model.addAttribute("categories", categoryService.getAll());
-        return "add_categories";
+        return "admin/add_categories";
     }
 
     @GetMapping("/getArticleCategory")
@@ -71,7 +71,7 @@ public class CategoryController {
         model.addAttribute("categories", articleService.getAllCategories(id));
         Article article = articleService.findById(id);
         model.addAttribute("articleId", article.getId());
-        return "all_categories_of_article";
+        return "general/all_categories_of_article";
     }
 
     @PostMapping("/delete")

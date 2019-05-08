@@ -29,13 +29,13 @@ public class ArticleController{
     @GetMapping("/all")
     public String listArticle(Model model) {
         model.addAttribute("articles", articleService.getAll());
-        return "all_articles";
+        return "general/all_articles";
     }
 
     @GetMapping("/new")
     public String newArticle(Model model) {
         model.addAttribute("article", new Article());
-        return "add_article";
+        return "admin/add_article";
     }
 
     @PostMapping("/new")
@@ -43,7 +43,7 @@ public class ArticleController{
                              @Valid Article article, BindingResult br) {
         articleService.add(article);
         model.addAttribute("article", new Article());
-        return "add_article";
+        return "admin/add_article";
     }
 
     @PostMapping("article")
@@ -55,19 +55,19 @@ public class ArticleController{
     @GetMapping("/show/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
         model.addAttribute("article", articleService.findById(id));
-        return "article_show";
+        return "general/article_show";
     }
 
     @GetMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, Model model) {
         model.addAttribute("article", articleService.findById(id));
-        return "add_article";
+        return "admin/add_article";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
-        return "redirect:/all_articles";
+        return "redirect:/general/all_articles";
     }
 
 
