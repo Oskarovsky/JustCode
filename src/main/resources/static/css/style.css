@@ -2,14 +2,25 @@
     padding-left:15px;
 }
 
-.loginPanel {
-    padding-left: 10px;
+
+body {
+    margin: 0;
+    padding-bottom: 0;
+    height: 100%;
 }
 
-.footer {
-    position: absolute;
+
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+
+footer {
+    margin-top: 10px;
     right: 0;
-    bottom: 0;
     left: 0;
     padding: 1rem;
     background-color: #efefef;
