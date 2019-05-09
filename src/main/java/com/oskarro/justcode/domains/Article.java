@@ -2,6 +2,7 @@ package com.oskarro.justcode.domains;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.*;
 @Data
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "categories")
 public class Article implements Serializable {
 
     @Id
@@ -46,7 +48,7 @@ public class Article implements Serializable {
     private Date lastUpdatedAt = new Date();
 
     @ManyToMany(mappedBy = "articles", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    List<Category> categories = new ArrayList<>();
+    private Set<Category> categories = new HashSet<>();
 
     public Article(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 500) String description, @NotNull String content) {
         this.title = title;
@@ -55,13 +57,20 @@ public class Article implements Serializable {
     }
 
     public void addCategory(Category category) {
-        categories.add(category);
-        category.articles.add(this);
+        this.categories.add(category);
+        category.getArticles().add(this);
     }
 
     public void removeCategory(Category category) {
-        categories.remove(category);
+        this.categories.remove(category);
         category.getArticles().remove(this);
+    }
+
+    @PreRemove
+    public void removeArticlesFromCategory() {
+        for (Category category : categories) {
+            category.getArticles().remove(this);
+        }
     }
 
 

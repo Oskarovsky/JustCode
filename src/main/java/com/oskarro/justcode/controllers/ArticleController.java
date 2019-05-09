@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 @Controller
 @RequestMapping(("/article"))
@@ -66,8 +67,10 @@ public class ArticleController{
 
     @GetMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id) {
+        Article article = articleService.findById(id);
+        article.removeArticlesFromCategory();
         articleService.deleteArticle(id);
-        return "redirect:/general/all_articles";
+        return "redirect:/article/all";
     }
 
 

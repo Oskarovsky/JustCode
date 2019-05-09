@@ -1,14 +1,15 @@
 package com.oskarro.justcode.domains;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -29,10 +30,11 @@ public class Category implements Serializable {
     @JoinTable(name = "category_article",
             joinColumns = @JoinColumn(name = "id_category"),
             inverseJoinColumns = @JoinColumn(name = "id_article"))
-    List<Article> articles = new ArrayList<>();
+    private Set<Article> articles = new HashSet();
 
 
     public Category(@NotNull @Size(max = 100) String name) {
         this.name = name;
     }
+
 }
