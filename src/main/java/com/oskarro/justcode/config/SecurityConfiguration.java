@@ -1,5 +1,6 @@
 package com.oskarro.justcode.config;
 
+import com.oskarro.justcode.services.LoggingAccessDeniedHandler;
 import com.oskarro.justcode.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LoggingAccessDeniedHandler accessDeniedHandler;
 
     @Bean("authenticationManager")
     @Override
@@ -46,8 +50,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/resources/css/**", "/resources/**").permitAll()
                     .antMatchers("/", "/articles", "/article/show/**", "/console/**", "/h2/**", "/category/",
                         "/article/show/**").permitAll()
+                    .antMatchers("/user/**").hasRole("USER")
                     .antMatchers("/admin/**", "/article/edit/**", "/article/delete/**", "/article/new",
-                            "/category/adds/**").hasRole("ADMIN")
+                        "/category/adds/**").hasRole("ADMIN")
                 .and()
                     .formLogin()
                         .loginPage("/login")
@@ -58,7 +63,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .clearAuthentication(true)
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login?logout")
-                            .permitAll();
+                            .permitAll()
+                .and()
+                    .exceptionHandling()
+                        .accessDeniedHandler(accessDeniedHandler);
 
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();

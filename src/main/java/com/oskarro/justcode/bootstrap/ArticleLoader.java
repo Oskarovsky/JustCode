@@ -79,7 +79,8 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
 
         List<User> users = new ArrayList<>();
 
-        List<Role> adminRole = Arrays.asList(new Role("ROLE_ADMIN"));
+        List<Role> adminRole = Arrays.asList(new Role("ROLE_ADMIN"), new Role("ROLE_USER"));
+        List<Role> userRole = Arrays.asList(new Role("ROLE_USER"));
 
         User adminUser = new User();
         adminUser.setFirstName("Oskar");
@@ -89,6 +90,15 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         adminUser.setRoles(adminRole);
         userRepository.save(adminUser);
         users.add(adminUser);
+
+        User userUser = new User();
+        userUser.setFirstName("Jacek");
+        userUser.setLastName("Placek");
+        userUser.setPassword(hashedPassword);
+        userUser.setEmail("oski@wp.pl");
+        userUser.setRoles(userRole);
+        userRepository.save(userUser);
+        users.add(userUser);
 
         return users;
     }

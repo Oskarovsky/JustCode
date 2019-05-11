@@ -17,13 +17,8 @@ public class IndexController {
         return "general/login";
     }
 
-    @GetMapping("/user")
-    public String userIndex() {
-        return "user/index";
-    }
-
     @GetMapping("/access-denied")
     public String accessDenied() {
-        return "/error/access-denied";
+        return "error/access-denied";
     }
 }

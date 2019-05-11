@@ -38,6 +38,13 @@
                     <a sec:authorize="isAnonymous()" class="loginPanel" href="#" th:href="@{/register}">Register</a>
                 </form>
 
+                <form th:action="@{/admin/profile}" method="get">
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" type="submit" value="User Profile">
+                </form>
+
+                <form th:action="@{/user}" method="get">
+                    <input sec:authorize="hasRole('ROLE_USER')" type="submit" value="User Profile">
+                </form>
 
                 <form th:action="@{/logout}" method="post">
                     <input sec:authorize="isAuthenticated()" type="submit" value="Log out" />

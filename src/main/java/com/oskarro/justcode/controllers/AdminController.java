@@ -13,4 +13,9 @@ public class AdminController {
     public String indexAdmin(Model model) {
         return "admin/index";
     }
+
+    @GetMapping("/profile")
+    public String profileAdmin(Model model) {
+        return "admin/profile";
+    }
 }

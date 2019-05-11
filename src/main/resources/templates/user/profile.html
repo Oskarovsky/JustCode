@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+
+    <title>JustCode - Your Profile</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+<div class="flex-wrapper">
+    <div class="container">
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+        <div th:if="${#httpServletRequest.remoteUser != null}">
+            <h3 th:text="'Your profile ' + ${#httpServletRequest.remoteUser}">
+                sample_user
+            </h3>
+        </div>
+    </div>
+
+    <footer>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+    </footer>
+
+</div>
+
+</body>
+</html>

@@ -44,6 +44,13 @@
             </tr>
         </table>
 
+        <form role="form" th:action="@{/article/new}" method="get">
+            <button type="submit" class="btn btn-info" sec:authorize="hasRole('ROLE_ADMIN')">
+                Add article
+            </button>
+        </form>
+
+
     </div>
 </div>
 

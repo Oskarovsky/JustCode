@@ -47,6 +47,6 @@ public class RegisterController {
         }
 
         userService.save(userDto);
-        return "redirect:/general/register?success";
+        return "redirect:/register?success";
     }
 }
