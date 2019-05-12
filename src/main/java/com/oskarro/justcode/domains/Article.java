@@ -4,11 +4,14 @@ package com.oskarro.justcode.domains;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Data
@@ -38,11 +41,13 @@ public class Article implements Serializable {
     private String content;
 
     @NotNull
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "posted_at")
     private Date postedAt = new Date();
 
     @NotNull
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_updated_at")
     private Date lastUpdatedAt = new Date();

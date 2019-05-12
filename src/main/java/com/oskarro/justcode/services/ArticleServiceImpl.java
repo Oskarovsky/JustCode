@@ -5,7 +5,10 @@ import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+
+import static com.nulabinc.zxcvbn.Pattern.Date;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -33,6 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article save(Article article) {
+        article.setLastUpdatedAt(new Date());
         return articleRepository.save(article);
     }
 
@@ -45,9 +49,6 @@ public class ArticleServiceImpl implements ArticleService {
     public void add(Article article) {
         articleRepository.save(article);
     }
-
-
-
 
 
 }

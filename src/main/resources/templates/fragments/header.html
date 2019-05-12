@@ -39,7 +39,7 @@
                 </form>
 
                 <form th:action="@{/admin/profile}" method="get">
-                    <input sec:authorize="hasRole('ROLE_ADMIN')" type="submit" value="User Profile">
+                    <input sec:authorize="hasRole('ROLE_ADMIN')" type="submit" value="Admin Profile">
                 </form>
 
                 <form th:action="@{/user}" method="get">
@@ -55,6 +55,10 @@
                 </form>
                 -->
             </div>
+        </nav>
+
+        <nav class="nav-divider">
+
         </nav>
 
         <div class="jumbotron">
