@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 
     <title>JustCode blog</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
+
 <body>
 
 <div class="flex-wrapper">
-<div class="container">
+<div class="container-fluid">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-    <div th:if="${#httpServletRequest.remoteUser != null}">
-        <p th:text="'Welcome ' + ${#httpServletRequest.remoteUser}">
-            sample_user
-        </p>
+
+
+
+    <div class="leftcolumn">
+        <div th:if="${#httpServletRequest.remoteUser != null}">
+            <p th:text="'Welcome ' + ${#httpServletRequest.remoteUser}">
+                sample_user
+            </p>
+        </div>
+
+        <main id="articles">
+            <article th:each="art : ${latest3articles}">
+                <div class="card">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <h3 class="popover-title" th:text="${art.title}">Article title</h3>
+                    </nav>
+                    <div class="date"><i>Posted on</i>
+                        <span th:text="${#dates.format(art.postedAt, 'dd-MMM-yyyy')}">22-May-2019</span>
+                    </div>
+                    <p class="content" th:utext="${art.content}">Post content</p>
+                </div>
+            </article>
+        </main>
     </div>
+
+    <!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
 </div>
 
 <footer>

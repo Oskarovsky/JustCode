@@ -11,6 +11,7 @@
 <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="leftcolumn">
     <div th:if="${not #lists.isEmpty(articles)}">
         <h2>All articles</h2>
         <table class="table table-striped">
@@ -49,9 +50,10 @@
                 Add article
             </button>
         </form>
-
-
     </div>
+    </div>
+
+    <!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
 </div>
 
 <footer>

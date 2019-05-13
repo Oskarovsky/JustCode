@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-
-import static com.nulabinc.zxcvbn.Pattern.Date;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -48,6 +47,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void add(Article article) {
         articleRepository.save(article);
+    }
+
+    @Override
+    public List<Article> findLatest5() {
+        return articleRepository.findAll().stream()
+                .sorted((a, b) -> b.getPostedAt().compareTo(a.getPostedAt()))
+                .limit(5)
+                .collect(Collectors.toList());
     }
 
 

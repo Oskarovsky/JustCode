@@ -10,20 +10,15 @@
 <!--/*@thymesVar id="category" type="com.oskarro.justcode.domains.Category"*/-->
 <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
 <div class="flex-wrapper">
-<div class="container">
+<div class="container-fluid">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="leftcolumn">
+
     <div class="row">
         <div class="col-md-12">
-            <h3 class="text-warning text-center">
-                Categories of this article
-            </h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label>All categories</label>
-            <table>
-                <thead>
+            <label style="font-size: 25px">All cat</label>
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
                     <th>LP</th>
                     <th>Name</th>
@@ -51,6 +46,9 @@
     <div class="col-md-4">
         <a href="/">Powrót</a>
     </div>
+    </div>
+
+    <!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
 </div>
 
 <footer>
