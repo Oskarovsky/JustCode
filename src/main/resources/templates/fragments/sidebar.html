@@ -15,10 +15,9 @@
             </div>
 
             <div class="card">
-                <h3>Popular Post</h3>
-                <div>Image</div><br>
-                <div>Image</div><br>
-                <div>Image</div>
+                <h3>Recent Articles</h3>
+                <a href="#" th:each="art : ${latest3articles}"
+                   th:text="${art.title}" th:href="#{'/article/show/' + art.id}">Work begins on HTML</a>
             </div>
         </div>
     </th:block>
