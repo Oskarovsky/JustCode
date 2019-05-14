@@ -10,9 +10,9 @@
 <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
 <!--/*@thymesVar id="category" type="com.oskarro.justcode.domains.Category"*/-->
 <div class="flex-wrapper">
-<div class="container">
+<div class="container-fluid">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-
+    <div class="leftcolumn">
     <h2>Article Form</h2>
     <div>
         <form class="form-horizontal" role="form" th:object="${article}" th:action="@{/article/new}" method="post">
@@ -40,6 +40,7 @@
                 <button type="submit" class="btn-sm">Submit</button>
             </div>
         </form>
+    </div>
     </div>
 
 </div>
