@@ -16,8 +16,8 @@
         <h2>All articles</h2>
         <table class="table table-striped">
             <tr>
-                <th>Number</th>
                 <th>Title</th>
+                <th>About</th>
                 <th>Categories</th>
                 <th sec:authorize="hasRole('ROLE_ADMIN')">Show categories</th>
                 <th>View</th>
@@ -26,8 +26,8 @@
             </tr>
 
             <tr th:each="article : ${articles}">
-                <td th:text="${article.id}">Id</td>
                 <td th:text="${article.title}">Article title</td>
+                <td th:text="${article.description}">This is about something</td>
                 <td th:if="${not #lists.isEmpty(article.categories)}">
                     <p th:each="category : ${article.categories}" th:text="${category.name}">Category</p>
                     <a th:href="@{/category/adds(id=${article.id})}" sec:authorize="hasRole('ROLE_ADMIN')">Add category</a>

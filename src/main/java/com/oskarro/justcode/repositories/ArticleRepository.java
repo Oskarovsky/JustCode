@@ -15,4 +15,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Category> getAllCategories(Long idCategory);
 
 
+
+
 }

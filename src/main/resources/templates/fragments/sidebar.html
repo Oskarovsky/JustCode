@@ -6,6 +6,7 @@
 <body>
 </body>
 
+<!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
     <th:block th:fragment="sidebar">
         <div class="sidebar">
             <div class="card">
@@ -14,10 +15,10 @@
                 <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
             </div>
 
-            <div class="card">
+            <div class="card" id="articles">
                 <h3>Recent Articles</h3>
                 <a href="#" th:each="art : ${latest3articles}"
-                   th:text="${art.title}" th:href="#{'/article/show/' + art.id}">Work begins on HTML</a>
+                   th:text="${art.title}" th:href="@{/article/show/{id}/(id=${art.id})}">Work begins on HTML</a>
             </div>
         </div>
     </th:block>

@@ -1,7 +1,6 @@
 package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
-import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.services.ArticleServiceImpl;
 import com.oskarro.justcode.services.CategoryServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.Collection;
 
 @Controller
 @RequestMapping(("/article"))
@@ -38,6 +36,14 @@ public class ArticleController{
         model.addAttribute("article", new Article());
         return "admin/add_article";
     }
+
+    @GetMapping("/category/{id}")
+    public String listArticlesByCategory(@PathVariable Long id, Model model) {
+        model.addAttribute("articles", categoryService.getAllByCategory(id));
+        model.addAttribute("category", categoryService.findById(id).getName());
+        return "/general/all_articles_from_category";
+    }
+
 
     @PostMapping("/new")
     public String addArticle(Model model,

@@ -6,7 +6,7 @@
 </head>
 
 <body>
-
+<!--/*@thymesVar id="category" type="com.oskarro.justcode.domains.Category"*/-->
 <div class="container-fluid">
     <div th:fragment="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -57,14 +57,12 @@
             </div>
         </nav>
 
-        <nav class="nav-divider">
+        <!--/*/ <th:block th:include="fragments/second_header :: second_header"></th:block> /*/-->
 
-        </nav>
 
         <div class="jumbotron">
             <h3 align="center">JustCode with Oskar Slyk</h3>
         </div>
-
 
 
 

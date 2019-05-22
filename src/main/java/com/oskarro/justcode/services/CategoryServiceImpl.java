@@ -1,5 +1,6 @@
 package com.oskarro.justcode.services;
 
+import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    public List<Article> getAllByCategory(Long id) {
+        return categoryRepository.getAllArticles(id);
     }
 }

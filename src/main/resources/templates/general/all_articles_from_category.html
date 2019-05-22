@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head lang="en">
+
+    <title>JustCode</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="flex-wrapper">
+    <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
+    <div class="container-fluid">
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+        <div class="leftcolumn">
+            <div th:if="${not #lists.isEmpty(articles)}">
+                <h2 th:text="'Category: ' + ${category}">Category:</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Categories</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Show categories</th>
+                        <th>View</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
+                    </tr>
+
+                    <tr th:each="article : ${articles}">
+                        <td th:text="${article.title}">Article title</td>
+                        <td th:text="${article.description}">Description article</td>
+                        <td th:if="${not #lists.isEmpty(article.categories)}">
+                            <p th:each="category : ${article.categories}" th:text="${category.name}">Category</p>
+                            <a th:href="@{/category/adds(id=${article.id})}" sec:authorize="hasRole('ROLE_ADMIN')">Add category</a>
+                        </td>
+                        <td th:if="${#lists.isEmpty(article.categories)}">
+                            <a th:if="${#lists.isEmpty(article.categories)}" sec:authorize="hasRole('ROLE_ADMIN')"
+                               th:href="@{/category/adds(id=${article.id})}">Add category</a>
+                        </td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{/category/getArticleCategory(id=${article.id})}">Show categories</a>
+                        </td>
+                        <td><a th:href="${'/article/show/' + article.id}">View</a></td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/article/edit/' + article.id}">Edit</a></td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/article/delete/' + article.id}">Delete</a></td>
+                    </tr>
+                </table>
+
+                <form role="form" th:action="@{/article/new}" method="get">
+                    <button type="submit" class="btn btn-info" sec:authorize="hasRole('ROLE_ADMIN')">
+                        Add article
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+    </div>
+
+    <footer>
+        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+    </footer>
+
+</div>
+
+</body>
+
+
+</html>
