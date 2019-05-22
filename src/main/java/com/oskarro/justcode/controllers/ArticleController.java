@@ -1,6 +1,7 @@
 package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
+import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.services.ArticleServiceImpl;
 import com.oskarro.justcode.services.CategoryServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(("/article"))
@@ -28,12 +30,16 @@ public class ArticleController{
     @GetMapping("/all")
     public String listArticle(Model model) {
         model.addAttribute("articles", articleService.getAll());
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         return "general/all_articles";
     }
 
     @GetMapping("/new")
     public String newArticle(Model model) {
         model.addAttribute("article", new Article());
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         return "admin/add_article";
     }
 
@@ -41,6 +47,8 @@ public class ArticleController{
     public String listArticlesByCategory(@PathVariable Long id, Model model) {
         model.addAttribute("articles", categoryService.getAllByCategory(id));
         model.addAttribute("category", categoryService.findById(id).getName());
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         return "/general/all_articles_from_category";
     }
 
@@ -50,6 +58,8 @@ public class ArticleController{
                              @Valid Article article, BindingResult br) {
         articleService.add(article);
         model.addAttribute("article", new Article());
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         return "admin/add_article";
     }
 
@@ -61,12 +71,16 @@ public class ArticleController{
 
     @GetMapping("/show/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         model.addAttribute("article", articleService.findById(id));
         return "general/article_show";
     }
 
     @GetMapping("/edit/{id}")
     public String editArticle(@PathVariable Long id, Model model) {
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         model.addAttribute("article", articleService.findById(id));
         return "admin/add_article";
     }

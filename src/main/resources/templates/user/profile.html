@@ -9,8 +9,11 @@
 <body>
 
 <div class="flex-wrapper">
-    <div class="container">
+    <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
+    <div class="container-fluid">
         <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+        <div class="leftcolumn">
+
         <div th:if="${#httpServletRequest.remoteUser != null}">
             <h3 th:text="'Your profile ' + ${#httpServletRequest.remoteUser}">
                 sample_user
@@ -18,11 +21,14 @@
         </div>
     </div>
 
-    <footer>
-        <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
-    </footer>
+    <!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+
+    </div>
 
 </div>
 
-</body>
+<footer>
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
 </html>

@@ -39,6 +39,8 @@ public class IndexController {
 
     @GetMapping("/login")
     public String login(Model model) {
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         return "general/login";
     }
 

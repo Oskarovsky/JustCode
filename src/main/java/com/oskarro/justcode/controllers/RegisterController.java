@@ -1,7 +1,10 @@
 package com.oskarro.justcode.controllers;
 
+import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.domains.User;
 import com.oskarro.justcode.domains.UserRegistrationDto;
+import com.oskarro.justcode.services.ArticleService;
+import com.oskarro.justcode.services.CategoryService;
 import com.oskarro.justcode.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,16 +16,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
 
     private UserService userService;
+    ArticleService articleService;
+    CategoryService categoryService;
 
-    public RegisterController(UserService userService) {
+    public RegisterController(ArticleService articleService, CategoryService categoryService,
+                              UserService userService) {
+        this.articleService = articleService;
+        this.categoryService = categoryService;
         this.userService = userService;
     }
+
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
@@ -31,6 +41,8 @@ public class RegisterController {
 
     @GetMapping
     public String showRegistrationForm(Model model) {
+        List<Category> allCategories = categoryService.getAll();
+        model.addAttribute("allCategories", allCategories);
         return "general/register";
     }
 

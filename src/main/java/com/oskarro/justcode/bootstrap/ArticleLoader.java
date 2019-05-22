@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -49,6 +50,11 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
 
         Category javaCategory = new Category("Java");
         Category springCategory = new Category("Spring");
+        Category devCategory = new Category("DevOps");
+        Category frontCategory = new Category("Front-End");
+        Category pythonCategory = new Category("Python");
+        Category sqlCategory = new Category("SQL");
+
 
         Article firstPost = new Article();
         firstPost.setTitle("My first blog post!");
@@ -68,6 +74,47 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         articleRepository.save(secondPost);
         articles.add(secondPost);
 
+        /**
+        Article thirdPost = new Article();
+        thirdPost.setTitle("Third post");
+        thirdPost.setDescription("Short description which gives you basic info about view of my project");
+        thirdPost.setContent("When the container is within your navbar, its horizontal padding is removed at " +
+                "breakpoints lower than your specified .navbar-expand{-sm|-md|-lg|-xl} class. This ensures we’re not " +
+                "doubling up on padding unnecessarily on lower viewports when your navbar is collapsed");
+        thirdPost.addCategory(devCategory);
+        articleRepository.save(thirdPost);
+        articles.add(thirdPost);
+
+        Article fourthPost = new Article();
+        fourthPost.setTitle("Fourth post");
+        fourthPost.setDescription("Fixed content about everything and about nothing");
+        fourthPost.setContent("Use our position utilities to place navbars in non-static positions. Choose from " +
+                "fixed to the top, fixed to the bottom, or stickied to the top (scrolls with the page until it " +
+                "reaches the top, then stays there).");
+        fourthPost.addCategory(pythonCategory);
+        articleRepository.save(fourthPost);
+        articles.add(fourthPost);
+
+        Article fifthPost = new Article();
+        fifthPost.setTitle("Never give up!");
+        fifthPost.setDescription("We have made many enhancements to the software that will strengthen system security.");
+        fifthPost.setContent("Although it’s not required, you can wrap a navbar in a .container to center it on a " +
+                "page or add one within to only center the contents of a fixed or static top navbar.");
+        fifthPost.addCategory(sqlCategory);
+        articleRepository.save(fifthPost);
+        articles.add(fifthPost);
+
+        Article sixthPost = new Article();
+        sixthPost.setTitle("Sunshine diamond");
+        sixthPost.setDescription("This is the newest post, i mean");
+        sixthPost.setContent("Navbar navigation links build on our .nav options with their own modifier class " +
+                "and require the use of toggler classes for proper responsive styling. Navigation in navbars will " +
+                "also grow to occupy as much horizontal space as possible to keep your navbar contents securely aligned.");
+        sixthPost.addCategory(frontCategory);
+        articleRepository.save(sixthPost);
+        articles.add(sixthPost);
+
+         */
         return articles;
     }
 
