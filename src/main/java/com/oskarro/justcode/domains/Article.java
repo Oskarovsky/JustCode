@@ -52,6 +52,9 @@ public class Article implements Serializable {
     @Column(name = "last_updated_at")
     private Date lastUpdatedAt = new Date();
 
+    @OneToMany(mappedBy = "article")
+    private List<Comment> comments;
+
     @ManyToMany(mappedBy = "articles", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Category> categories = new HashSet<>();
 

@@ -15,10 +15,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Getter
 @Setter
@@ -47,32 +44,40 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
     private List<Article> getArticles() {
 
         List<Article> articles = new ArrayList<>();
-
         Category javaCategory = new Category("Java");
         Category springCategory = new Category("Spring");
-        Category devCategory = new Category("DevOps");
-        Category frontCategory = new Category("Front-End");
-        Category pythonCategory = new Category("Python");
-        Category sqlCategory = new Category("SQL");
+        javaCategory.setArticles(new HashSet<>());
+        springCategory.setArticles(new HashSet<>());
+        //Category devCategory = new Category("DevOps");
+        //Category frontCategory = new Category("Front-End");
+        //Category pythonCategory = new Category("Python");
+        //Category sqlCategory = new Category("SQL");
 
+        categoryRepository.save(javaCategory);
+        categoryRepository.save(springCategory);
 
         Article firstPost = new Article();
         firstPost.setTitle("My first blog post!");
         firstPost.setDescription("This is my first post on this web.");
         firstPost.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
                 "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
-        firstPost.addCategory(javaCategory);
+        firstPost.setCategories(new HashSet<>());
         articleRepository.save(firstPost);
-        articles.add(firstPost);
+        javaCategory.getArticles().add(firstPost);
+        springCategory.getArticles().add(firstPost);
+        categoryRepository.save(javaCategory);
 
         Article secondPost = new Article();
         secondPost.setTitle("Java is amazing");
         secondPost.setDescription("We want to create new blog website for java fanatics");
         secondPost.setContent("No, not really. It has us writing SQL statements. What if you’re just doing a " +
                 "prototype? If you");
-        secondPost.addCategory(springCategory);
+        secondPost.setCategories(new HashSet<>());
         articleRepository.save(secondPost);
-        articles.add(secondPost);
+        springCategory.getArticles().add(secondPost);
+        categoryRepository.save(springCategory);
+
+
 
         /**
         Article thirdPost = new Article();
