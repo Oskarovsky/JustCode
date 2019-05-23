@@ -1,5 +1,6 @@
 package com.oskarro.justcode.domains;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Category implements Serializable {
 
     @Id
@@ -33,8 +35,9 @@ public class Category implements Serializable {
     private Set<Article> articles = new HashSet();
 
 
-    public Category(@NotNull @Size(max = 100) String name) {
+    public Category(@NotNull @Size(max = 100) String name, HashSet<Article> hashSet) {
         this.name = name;
+        this.articles = hashSet;
     }
 
 }

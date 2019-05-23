@@ -16,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -43,19 +45,6 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
 
     private List<Article> getArticles() {
 
-        List<Article> articles = new ArrayList<>();
-        Category javaCategory = new Category("Java");
-        Category springCategory = new Category("Spring");
-        javaCategory.setArticles(new HashSet<>());
-        springCategory.setArticles(new HashSet<>());
-        //Category devCategory = new Category("DevOps");
-        //Category frontCategory = new Category("Front-End");
-        //Category pythonCategory = new Category("Python");
-        //Category sqlCategory = new Category("SQL");
-
-        categoryRepository.save(javaCategory);
-        categoryRepository.save(springCategory);
-
         Article firstPost = new Article();
         firstPost.setTitle("My first blog post!");
         firstPost.setDescription("This is my first post on this web.");
@@ -63,9 +52,6 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
                 "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
         firstPost.setCategories(new HashSet<>());
         articleRepository.save(firstPost);
-        javaCategory.getArticles().add(firstPost);
-        springCategory.getArticles().add(firstPost);
-        categoryRepository.save(javaCategory);
 
         Article secondPost = new Article();
         secondPost.setTitle("Java is amazing");
@@ -74,21 +60,15 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
                 "prototype? If you");
         secondPost.setCategories(new HashSet<>());
         articleRepository.save(secondPost);
-        springCategory.getArticles().add(secondPost);
-        categoryRepository.save(springCategory);
 
-
-
-        /**
         Article thirdPost = new Article();
         thirdPost.setTitle("Third post");
         thirdPost.setDescription("Short description which gives you basic info about view of my project");
         thirdPost.setContent("When the container is within your navbar, its horizontal padding is removed at " +
                 "breakpoints lower than your specified .navbar-expand{-sm|-md|-lg|-xl} class. This ensures we’re not " +
                 "doubling up on padding unnecessarily on lower viewports when your navbar is collapsed");
-        thirdPost.addCategory(devCategory);
+        thirdPost.setCategories(new HashSet<>());
         articleRepository.save(thirdPost);
-        articles.add(thirdPost);
 
         Article fourthPost = new Article();
         fourthPost.setTitle("Fourth post");
@@ -96,18 +76,16 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         fourthPost.setContent("Use our position utilities to place navbars in non-static positions. Choose from " +
                 "fixed to the top, fixed to the bottom, or stickied to the top (scrolls with the page until it " +
                 "reaches the top, then stays there).");
-        fourthPost.addCategory(pythonCategory);
+        fourthPost.setCategories(new HashSet<>());
         articleRepository.save(fourthPost);
-        articles.add(fourthPost);
 
         Article fifthPost = new Article();
         fifthPost.setTitle("Never give up!");
         fifthPost.setDescription("We have made many enhancements to the software that will strengthen system security.");
         fifthPost.setContent("Although it’s not required, you can wrap a navbar in a .container to center it on a " +
                 "page or add one within to only center the contents of a fixed or static top navbar.");
-        fifthPost.addCategory(sqlCategory);
+        fifthPost.setCategories(new HashSet<>());
         articleRepository.save(fifthPost);
-        articles.add(fifthPost);
 
         Article sixthPost = new Article();
         sixthPost.setTitle("Sunshine diamond");
@@ -115,11 +93,59 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         sixthPost.setContent("Navbar navigation links build on our .nav options with their own modifier class " +
                 "and require the use of toggler classes for proper responsive styling. Navigation in navbars will " +
                 "also grow to occupy as much horizontal space as possible to keep your navbar contents securely aligned.");
-        sixthPost.addCategory(frontCategory);
+        sixthPost.setCategories(new HashSet<>());
         articleRepository.save(sixthPost);
-        articles.add(sixthPost);
 
-         */
+        Article seventhPost = new Article();
+        seventhPost.setTitle("ManyToMany");
+        seventhPost.setDescription("Handling SQL database for all types associations");
+        seventhPost.setContent("These libraries provide convenient utility methods to initialize collections like " +
+                "Set. Since Google Guava is one of the most commonly used here we have an example from it. The Guava " +
+                "has convenient methods for mutable and immutable Set objects:");
+        seventhPost.setCategories(new HashSet<>());
+        articleRepository.save(seventhPost);
+
+
+        Category javaCategory = new Category("Java", new HashSet<>());
+        Category springCategory = new Category("Spring", new HashSet<>());
+        Category devCategory = new Category("DevOps", new HashSet<>());
+        Category frontCategory = new Category("Front-End", new HashSet<>());
+        Category pythonCategory = new Category("Python", new HashSet<>());
+        Category sqlCategory = new Category("SQL", new HashSet<>());
+
+
+        List<Article> articles = new ArrayList<>();
+        categoryRepository.save(javaCategory);
+        categoryRepository.save(springCategory);
+        categoryRepository.save(devCategory);
+        categoryRepository.save(frontCategory);
+        categoryRepository.save(pythonCategory);
+        categoryRepository.save(sqlCategory);
+
+        javaCategory.getArticles().add(firstPost);
+        javaCategory.getArticles().add(fifthPost);
+        categoryRepository.save(javaCategory);
+
+        springCategory.getArticles().add(fifthPost);
+        categoryRepository.save(springCategory);
+
+        devCategory.getArticles().add(secondPost);
+        categoryRepository.save(devCategory);
+
+        frontCategory.getArticles().add(thirdPost);
+        categoryRepository.save(frontCategory);
+
+        pythonCategory.getArticles().add(fourthPost);
+        pythonCategory.getArticles().add(sixthPost);
+        categoryRepository.save(pythonCategory);
+
+        sqlCategory.getArticles().add(seventhPost);
+        categoryRepository.save(sqlCategory);
+
+
+
+
+
         return articles;
     }
 
