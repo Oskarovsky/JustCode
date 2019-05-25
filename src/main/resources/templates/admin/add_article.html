@@ -35,6 +35,13 @@
                     <input type="text" class="form-control" th:field="*{content}" id="content"/>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="name">Choose category</label>
+                <select  name="idCategory" id="idObject" class="form-control">
+                    <option th:each="category  : ${allCategories}" th:value="${category.id}"
+                            th:text="${category.name}">Dostawca</option>
+                </select>
+            </div>
 
             <div class="row">
                 <button type="submit" class="btn-sm">Submit</button>

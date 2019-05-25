@@ -2,6 +2,7 @@ package com.oskarro.justcode.services;
 
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.domains.Category;
+import com.oskarro.justcode.domains.Comment;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,11 @@ public class ArticleServiceImpl implements ArticleService {
                 .sorted((a, b) -> b.getPostedAt().compareTo(a.getPostedAt()))
                 .limit(5)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Comment> getAllComments(Long id) {
+        return articleRepository.getAllComments(id);
     }
 
 

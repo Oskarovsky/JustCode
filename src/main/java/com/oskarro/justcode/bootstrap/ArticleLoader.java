@@ -1,23 +1,18 @@
 package com.oskarro.justcode.bootstrap;
 
-import com.oskarro.justcode.domains.Article;
-import com.oskarro.justcode.domains.Category;
-import com.oskarro.justcode.domains.Role;
-import com.oskarro.justcode.domains.User;
+import com.oskarro.justcode.domains.*;
 import com.oskarro.justcode.repositories.ArticleRepository;
 import com.oskarro.justcode.repositories.CategoryRepository;
+import com.oskarro.justcode.repositories.CommentRepository;
 import com.oskarro.justcode.repositories.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -27,11 +22,14 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
     private final ArticleRepository articleRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
-    public ArticleLoader(ArticleRepository articleRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
+    public ArticleLoader(ArticleRepository articleRepository, CategoryRepository categoryRepository,
+                         UserRepository userRepository, CommentRepository commentRepository) {
         this.articleRepository = articleRepository;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
+        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -45,12 +43,23 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
 
     private List<Article> getArticles() {
 
+        Comment comment1 = new Comment();
+        comment1.setContent("This is nice job !");
+
+        Comment comment2 = new Comment();
+        comment2.setContent("Oh my god");
+
+        //commentRepository.save(comment);
+
         Article firstPost = new Article();
         firstPost.setTitle("My first blog post!");
         firstPost.setDescription("This is my first post on this web.");
         firstPost.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
                 "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation");
         firstPost.setCategories(new HashSet<>());
+        firstPost.setComments(new ArrayList<>());
+        firstPost.addComment(comment1);
+        firstPost.addComment(comment2);
         articleRepository.save(firstPost);
 
         Article secondPost = new Article();
@@ -141,6 +150,8 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
 
         sqlCategory.getArticles().add(seventhPost);
         categoryRepository.save(sqlCategory);
+
+
 
 
 

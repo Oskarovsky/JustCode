@@ -7,13 +7,12 @@ import com.oskarro.justcode.services.CategoryServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping(("/article"))
@@ -55,10 +54,14 @@ public class ArticleController{
 
     @PostMapping("/new")
     public String addArticle(Model model,
-                             @Valid Article article, BindingResult br) {
+                             @Valid Article article, BindingResult br,
+                             @RequestParam(value = "idCategory", required = true) Long idCategory) {
         articleService.add(article);
         model.addAttribute("article", new Article());
         List<Category> allCategories = categoryService.getAll();
+        Category cat = categoryService.findById(idCategory);
+        cat.getArticles().add(article);
+        categoryService.save(cat);
         model.addAttribute("allCategories", allCategories);
         return "admin/add_article";
     }
@@ -73,6 +76,7 @@ public class ArticleController{
     public String showArticle(@PathVariable Long id, Model model) {
         List<Category> allCategories = categoryService.getAll();
         model.addAttribute("allCategories", allCategories);
+        model.addAttribute("allComments", articleService.getAllComments(id));
         model.addAttribute("article", articleService.findById(id));
         return "general/article_show";
     }

@@ -43,17 +43,20 @@ public class Article implements Serializable {
     @NotNull
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "posted_at")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Date postedAt = new Date();
 
     @NotNull
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_updated_at")
+    @Column(name = "updated_at", nullable = false)
     private Date lastUpdatedAt = new Date();
 
-    @OneToMany(mappedBy = "article")
-    private List<Comment> comments;
+    @OneToMany(
+            mappedBy = "article",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany(mappedBy = "articles", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Category> categories = new HashSet<>();
@@ -67,6 +70,16 @@ public class Article implements Serializable {
     public void addCategory(Category category) {
         this.categories.add(category);
         category.getArticles().add(this);
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        comment.setArticle(this);
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setArticle(null);
     }
 
     public void removeCategory(Category category) {

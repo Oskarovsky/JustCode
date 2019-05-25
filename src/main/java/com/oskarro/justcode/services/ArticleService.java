@@ -2,6 +2,7 @@ package com.oskarro.justcode.services;
 
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.domains.Category;
+import com.oskarro.justcode.domains.Comment;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface ArticleService {
     void add(Article article);
 
     List<Article> findLatest5();
+
+    List<Comment> getAllComments(Long id);
 
 }
