@@ -61,6 +61,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         adminUser.setPassword(hashedPassword);
         adminUser.setEmail("oskar.slyk@gmail.com");
         adminUser.setRoles(adminRole);
+        adminUser.setUsername("Oskarro");
         userRepository.save(adminUser);
         users.add(adminUser);
 
@@ -70,6 +71,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         userUser.setPassword(hashedPassword);
         userUser.setEmail("oski@wp.pl");
         userUser.setRoles(userRole);
+        userUser.setUsername("mordeczka");
         userRepository.save(userUser);
         users.add(userUser);
 

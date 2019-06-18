@@ -21,13 +21,13 @@
                     <form autocomplete="off" action="#" th:action="@{/createComment}"
                           th:object="${comment}" method="post" role="form">
 
-                        <h2 class="text-center">Write new comment</h2>
+                       <h2 class="text-center">Write new comment</h2>
 
                         <div class="form-group">
-                            <label th:if="${#fields.hasErrors('body')}" th:errors="*{content}"
+                            <label th:if="${#fields.hasErrors('content')}" th:errors="*{content}"
                                    class="alert alert-danger"></label>
                             <textarea th:field="*{content}"
-                                      placeholder="Body" class="form-control input-lg"/>
+                                      placeholder="Content" class="form-control input-lg"></textarea>
                         </div>
 
                         <input type="hidden" th:field="*{article}"/>
@@ -41,7 +41,13 @@
                 </div>
             </div>
         </div>
+        <!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
     </div>
+
+<footer>
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</footer>
+
 </div>
 
 </body>

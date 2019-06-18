@@ -10,7 +10,8 @@
 <div class="flex-wrapper">
 <!--/*@thymesVar id="article" type="com.oskarro.justcode.domains.Article"*/-->
 <!--/*@thymesVar id="comment" type="com.oskarro.justcode.domains.Comment"*/-->
-<div class="container-fluid">
+
+    <div class="container-fluid">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
 <div class="leftcolumn">
@@ -38,27 +39,17 @@
         </form>
     </div>
 
-    <!--
-    <div>
-        <form class="form-horizontal" role="form" action="#" th:object="${comments}" method="post"
-              th:action="@{'/article/' + ${article.getId()} + '/comment'}">
-            <label for="content" class="col-sm-2 control-label">Comment:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{content}" id="content"/>
-            </div>
-            <div class="row">
-                <button type="submit" class="btn-sm">Submit</button>
-            </div>
-        </form>
-    </div>
-    -->
 
     <div th:each="comment : ${article.comments}">
-        <p class="text-info" th:text="${comment.user}"></p>
-        <p class="text-secondary" th:text="${#dates.format(comment.getCreateDate, 'dd-MM-yyyy')}">20 may 2019</p>
+        <p class="text-info" th:text="${comment.user.getUsername()}"></p>
+<!--        <p class="text-secondary" th:text="${#dates.format(comment.getCreateDate, 'dd-MM-yyyy')}">20 may 2019</p>-->
         <p class="card" th:text="${comment.content}"></p>
         <!--<img th:src="@{/images/def_face.jpg}" class="img img-rounded img-fluid"/>-->
     </div>
+
+    <!--/*/ <th:block th:include="fragments/comment :: comment"></th:block> /*/-->
+
+
 
 </div>
 

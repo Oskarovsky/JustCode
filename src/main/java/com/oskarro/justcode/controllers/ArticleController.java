@@ -3,26 +3,31 @@ package com.oskarro.justcode.controllers;
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.domains.Comment;
-import com.oskarro.justcode.services.ArticleServiceImpl;
+import com.oskarro.justcode.domains.User;
+import com.oskarro.justcode.services.ArticleService;
 import com.oskarro.justcode.services.CategoryServiceImpl;
+import com.oskarro.justcode.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.*;
 
 @Controller
 @RequestMapping(("/article"))
 public class ArticleController{
 
-    private ArticleServiceImpl articleService;
     private CategoryServiceImpl categoryService;
+    private ArticleService articleService;
+    private UserService userService;
 
-    public ArticleController(ArticleServiceImpl articleService, CategoryServiceImpl categoryService) {
+    public ArticleController(ArticleService articleService, CategoryServiceImpl categoryService, UserService userService) {
         this.articleService = articleService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/all")
@@ -72,12 +77,25 @@ public class ArticleController{
     }
 
     @GetMapping("/show/{id}")
-    public String showArticle(@PathVariable Long id, Model model) {
+    public String showArticle(@PathVariable Long id, Model model,
+                              Principal principal) {
         List<Category> allCategories = categoryService.getAll();
+        Optional<User> user = userService.findByEmail(principal.getName());
+        Optional<Article> article = articleService.findById(id);
         model.addAttribute("allCategories", allCategories);
         model.addAttribute("allComments", articleService.getAllComments(id));
-        model.addAttribute("article", articleService.findById(id).get());
-        return "general/article_show";
+        model.addAttribute("article", article.get());
+        //model.addAttribute("article", article);
+        if (user.isPresent()) {
+            Comment comment = new Comment();
+            comment.setUser(user.get());
+            comment.setArticle(article.get());
+            model.addAttribute("comment", comment);
+            return "general/article_show";
+        } else {
+            return "error";
+        }
+        //return "general/article_show";
     }
 
     @GetMapping("/edit/{id}")

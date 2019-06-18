@@ -39,41 +39,17 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/createComment")
-    public String createNewComment(@Valid Comment comment,
+    @PostMapping("/createComment")
+    public String createNewComment(@Valid Comment comment, Model model,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/general/commentForm";
+            return "general/comment_form";
         } else {
             commentService.save(comment);
             return "redirect:/article/show/" + comment.getArticle().getId();
         }
     }
 
-    @GetMapping(value = "commentArticle/{id}")
-    public String commentArticleWithId(@PathVariable Long id,
-                                       Principal principal,
-                                       Model model) {
-        Optional<Article> article = articleService.findById(id);
-
-        if (article.isPresent()) {
-            Optional<User> user = userService.findByEmail(principal.getName());
-
-            if (user.isPresent()) {
-                Comment comment = new Comment();
-                comment.setUser(user.get());
-                comment.setArticle(article.get());
-                model.addAttribute("comment", comment);
-                return "/general/comment_form";
-            } else {
-                return "/error";
-            }
-
-        } else {
-            return "/error";
-        }
-
-    }
 
     @PostMapping("/article/{id}/comment")
     public String addComment(@PathVariable Long id, Model model) {
