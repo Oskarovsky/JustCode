@@ -39,15 +39,22 @@
         </form>
     </div>
 
+    <div class="input_comment">
+    <!--/*/ <th:block th:include="fragments/comment :: comment"></th:block> /*/-->
 
+
+    <div class="new_comment">
     <div th:each="comment : ${article.comments}">
+        <div class="user_avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg"></div>
+        <div class="comment_body"><p class="card" th:text="${comment.content}"></p></div>
         <p class="text-info" th:text="${comment.user.getUsername()}"></p>
-<!--        <p class="text-secondary" th:text="${#dates.format(comment.getCreateDate, 'dd-MM-yyyy')}">20 may 2019</p>-->
-        <p class="card" th:text="${comment.content}"></p>
+        <p class="text-secondary" th:text="${#dates.format(comment.createDate, 'dd-MM-yyyy')}">20 may 2019</p>
         <!--<img th:src="@{/images/def_face.jpg}" class="img img-rounded img-fluid"/>-->
     </div>
+    </div>
 
-    <!--/*/ <th:block th:include="fragments/comment :: comment"></th:block> /*/-->
+
+    </div>
 
 
 

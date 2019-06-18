@@ -77,3 +77,58 @@ footer {
 .card-inner{
     margin-left: 4rem;
 }
+
+.user_avatar {
+    width: 65px;
+    height: 65px;
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.comment_block {
+    width: 65%;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.input_comment {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    width: calc(100% - 75px);
+}
+
+
+.new_comment {
+    width: 100%;
+    height: auto;
+    padding: 20px 0;
+}
+
+.user_comment {
+    list-style-type: none;
+}
+
+.comment_body {
+    display: inline-block;
+    vertical-align: middle;
+
+    width: calc(100% - 75px);
+    min-height: 65px;
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: .9rem;
+    color: #555;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+
+
+
