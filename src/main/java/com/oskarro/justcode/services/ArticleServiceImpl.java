@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,9 +31,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article findById(Long id) {
-        return articleRepository.findById(id).orElse(null);
+    public Optional<Article> findById(Long id) {
+        return articleRepository.findById(id);
     }
+
 
     @Override
     public Article save(Article article) {
@@ -53,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findLatest5() {
         return articleRepository.findAll().stream()
-                .sorted((a, b) -> b.getPostedAt().compareTo(a.getPostedAt()))
+                .sorted((a, b) -> b.getCreateDate().compareTo(a.getCreateDate()))
                 .limit(5)
                 .collect(Collectors.toList());
     }

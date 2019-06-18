@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/category")
@@ -68,8 +69,8 @@ public class CategoryController {
         List<Category> allCategories = categoryService.getAll();
         model.addAttribute("allCategories", allCategories);
         Category cat = categoryService.findById(idCategory);
-        Article art = articleService.findById(idArticle);
-        cat.getArticles().add(art);
+        Optional<Article> art = articleService.findById(idArticle);
+        cat.getArticles().add(art.get());
         categoryService.save(cat);
         model.addAttribute("id", idArticle);
         model.addAttribute("categories", categoryService.getAll());
@@ -82,8 +83,8 @@ public class CategoryController {
         List<Category> allCategories = categoryService.getAll();
         model.addAttribute("allCategories", allCategories);
         model.addAttribute("categories", articleService.getAllCategories(id));
-        Article article = articleService.findById(id);
-        model.addAttribute("articleId", article.getId());
+        Optional<Article> article = articleService.findById(id);
+        model.addAttribute("articleId", article.get().getId());
         return "general/all_categories_of_article";
     }
 
@@ -94,7 +95,7 @@ public class CategoryController {
         List<Category> allCategories = categoryService.getAll();
         model.addAttribute("allCategories", allCategories);
         Category cat = categoryService.findById(idCategory);
-        Article art = articleService.findById(idArticle);
+        Optional<Article> art = articleService.findById(idArticle);
         cat.getArticles().remove(art);
         categoryService.save(cat);
         redirectAttributes.addAttribute("idArt", idArticle);

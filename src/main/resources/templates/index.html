@@ -29,7 +29,7 @@
                         <h3 class="popover-title" th:text="${art.title}">Article title</h3>
                     </nav>
                     <div class="date"><i>Posted on</i>
-                        <span th:text="${#dates.format(art.postedAt, 'dd-MMM-yyyy')}">22-May-2019</span>
+                        <span th:text="${#dates.format(art.createDate, 'dd-MMM-yyyy')}">22-May-2019</span>
                     </div>
                     <p class="content" th:utext="${art.content}">Post content</p>
                 </div>

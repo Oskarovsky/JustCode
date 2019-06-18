@@ -1,6 +1,7 @@
 package com.oskarro.justcode.domains;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -16,18 +18,20 @@ import java.util.*;
 
 @Data
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "categories")
+@EqualsAndHashCode(exclude = "categories", callSuper = false)
 public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_article")
+    @Column(name = "article_id")
     private Long id;
 
     @NotNull
     @Size(max = 100)
-    @Column(name = "title_article")
+    @Column(name = "title", nullable = false)
+    @NotEmpty(message = "*Please provide title")
     private String title;
 
     @NotNull
@@ -43,20 +47,22 @@ public class Article implements Serializable {
     @NotNull
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date postedAt = new Date();
+    @Column(name = "create_date", nullable = false, updatable = false)
+    private Date createDate = new Date();
 
     @NotNull
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "update_date", nullable = false)
     private Date lastUpdatedAt = new Date();
 
     @OneToMany(
             mappedBy = "article",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private Collection<Comment> comments;
+
+
 
     @ManyToMany(mappedBy = "articles", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Category> categories = new HashSet<>();

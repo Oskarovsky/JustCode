@@ -5,12 +5,13 @@ import com.oskarro.justcode.domains.Category;
 import com.oskarro.justcode.domains.Comment;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArticleService {
 
     List<Article> getAll();
 
-    Article findById(Long id);
+    Optional<Article> findById(Long id);
 
     List<Category> getAllCategories(Long id);
 

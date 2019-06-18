@@ -2,6 +2,7 @@ package com.oskarro.justcode.controllers;
 
 import com.oskarro.justcode.domains.Article;
 import com.oskarro.justcode.domains.Category;
+import com.oskarro.justcode.domains.Comment;
 import com.oskarro.justcode.services.ArticleServiceImpl;
 import com.oskarro.justcode.services.CategoryServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping(("/article"))
@@ -77,7 +76,7 @@ public class ArticleController{
         List<Category> allCategories = categoryService.getAll();
         model.addAttribute("allCategories", allCategories);
         model.addAttribute("allComments", articleService.getAllComments(id));
-        model.addAttribute("article", articleService.findById(id));
+        model.addAttribute("article", articleService.findById(id).get());
         return "general/article_show";
     }
 
@@ -85,14 +84,14 @@ public class ArticleController{
     public String editArticle(@PathVariable Long id, Model model) {
         List<Category> allCategories = categoryService.getAll();
         model.addAttribute("allCategories", allCategories);
-        model.addAttribute("article", articleService.findById(id));
+        model.addAttribute("article", articleService.findById(id).get());
         return "admin/add_article";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id) {
-        Article article = articleService.findById(id);
-        article.removeArticlesFromCategory();
+        Optional<Article> article = articleService.findById(id);
+        article.get().removeArticlesFromCategory();
         articleService.deleteArticle(id);
         return "redirect:/article/all";
     }
