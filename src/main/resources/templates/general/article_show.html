@@ -40,7 +40,9 @@
     </div>
 
     <div class="input_comment">
+        <div th:if="${#httpServletRequest.remoteUser != null}">
     <!--/*/ <th:block th:include="fragments/comment :: comment"></th:block> /*/-->
+        </div>
 
 
     <div class="new_comment">

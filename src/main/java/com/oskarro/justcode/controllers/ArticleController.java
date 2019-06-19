@@ -77,10 +77,12 @@ public class ArticleController{
     }
 
     @GetMapping("/show/{id}")
-    public String showArticle(@PathVariable Long id, Model model,
-                              Principal principal) {
+    public String showArticle(@PathVariable Long id, Model model, Principal principal) {
         List<Category> allCategories = categoryService.getAll();
-        Optional<User> user = userService.findByEmail(principal.getName());
+        Optional<User> user = Optional.empty();
+        if (principal != null) {
+            user = userService.findByEmail(principal.getName());
+        }
         Optional<Article> article = articleService.findById(id);
         model.addAttribute("allCategories", allCategories);
         model.addAttribute("allComments", articleService.getAllComments(id));
@@ -93,8 +95,8 @@ public class ArticleController{
             model.addAttribute("comment", comment);
             return "general/article_show";
         } else {
-            return "error";
-        }
+            return "general/article_show";}
+//
         //return "general/article_show";
     }
 
