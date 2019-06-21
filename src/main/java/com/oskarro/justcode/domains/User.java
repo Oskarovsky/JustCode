@@ -25,6 +25,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private String image;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -34,16 +35,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
-
-
-
-    public User(String username, String firstName, String lastName, String email, String password) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
 
 
 

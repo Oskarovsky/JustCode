@@ -40,7 +40,6 @@ footer {
 .card {
     background-color: white;
     padding: 20px;
-    margin-top: 20px;
 }
 
 
@@ -125,8 +124,17 @@ footer {
     color: #555;
 }
 
-.inline-block {
+ul.comment {
+    list-style-type: none;
+    padding-left: 75px;
+    font-size: 0;
+}
+
+li.comment {
     display: inline-block;
+    padding: 5px;
+    font-size: .7rem;
+
 }
 
 

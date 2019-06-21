@@ -62,6 +62,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         adminUser.setEmail("oskar.slyk@gmail.com");
         adminUser.setRoles(adminRole);
         adminUser.setUsername("Oskarro");
+        adminUser.setImage("https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg");
         userRepository.save(adminUser);
         users.add(adminUser);
 
@@ -72,6 +73,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         userUser.setEmail("oski@wp.pl");
         userUser.setRoles(userRole);
         userUser.setUsername("mordeczka");
+        userUser.setImage("https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/73.jpg");
         userRepository.save(userUser);
         users.add(userUser);
 

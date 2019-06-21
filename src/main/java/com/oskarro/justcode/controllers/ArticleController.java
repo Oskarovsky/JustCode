@@ -82,6 +82,7 @@ public class ArticleController{
         Optional<User> user = Optional.empty();
         if (principal != null) {
             user = userService.findByEmail(principal.getName());
+            model.addAttribute("user", principal);
         }
         Optional<Article> article = articleService.findById(id);
         model.addAttribute("allCategories", allCategories);

@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        user.setImage("http://if.fjfi.cvut.cz/joomla3//media/com_if/images/profile-picture.png");
         return userRepository.save(user);
     }
 
