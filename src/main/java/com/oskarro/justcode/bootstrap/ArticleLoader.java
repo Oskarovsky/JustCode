@@ -59,7 +59,7 @@ public class ArticleLoader implements ApplicationListener<ContextRefreshedEvent>
         adminUser.setFirstName("Oskar");
         adminUser.setLastName("Slyk");
         adminUser.setPassword(hashedPassword);
-        adminUser.setEmail("oskar.slyk@gmail.com");
+        adminUser.setEmail("oskar@oskar.com");
         adminUser.setRoles(adminRole);
         adminUser.setUsername("Oskarro");
         adminUser.setImage("https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg");
